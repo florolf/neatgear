@@ -184,19 +184,6 @@ def configure_vlan(img, vid, members, untagged):
 def block_untagged(img, ports):
     IEEEVlan.VlanControl3.set(img, ports)
 
-def dump_port2vlan(ports):
-    print("Port to VLAN mapping:")
-    print("+---+-------+------------------------------------------------------------------+")
-    print("| P | UNTAG | TAG                                                              |")
-    print("+---+-------+------------------------------------------------------------------+")
-    for port in sorted(ports.keys()):
-        if 'default_vlan' in ports[port]:
-            untag = "% 4d" % ports[port]['default_vlan']
-        else:
-            untag = "     "
-
-        print("| %d | %s | %s" % (port, untag, ' '.join(map(lambda x: "% 4d" % x, sorted(ports[port]['vlans'])))))
-
 def print_vlan_table(members, default_vlan):
     print("+-----+-------+%s" % ('-------+' * len(members)))
     print("| Port \ VLAN | %s |" % ' | '.join(map(lambda x: " %4d" % x, sorted(members.keys()))))
