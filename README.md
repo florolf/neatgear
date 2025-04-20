@@ -1,5 +1,7 @@
 # neatgear
 
+**NOTE:** There are now new versions of the GS108 (annoyingly also called "v4") that are based on the RTL8370N instead. This project won't work for them, please check the pictures in this README or in the blog post to see if you have a compatible device.
+
 This is a tool for patching the SPI flash contents present on Netgear GS108v4
 switches to make them 802.1Q-VLAN-capable. See [this blog post](http://blog.n621.de/2019/04/vlans-on-the-netgear-gs108-switch/)
 for technical details.
