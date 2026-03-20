@@ -56,12 +56,14 @@ class Image(object):
             raise Exception('Data offset (0x%x) points past end of image' % self.data_offset)
 
         header = self.image[self.data_offset] | (self.image[self.data_offset+1] << 8)
-        if (header >> 11 != 0x15):
-            raise Exception("Invalid magic found at offset 0x%x" % self.data_offset)
-
-        self.entries = header & 0x3ff
-        self.speedmode = (header >> 10) & 1
-        logging.info('Found valid data header with %d entries and speed mode %d', self.entries, self.speedmode)
+        if (header >> 11 == 0x15):
+            self.entries = header & 0x3ff
+            self.speedmode = (header >> 10) & 1
+            logging.info('Found valid data header with %d entries and speed mode %d', self.entries, self.speedmode)
+        else:
+            self.entries = 0
+            self.speedmode = 0
+            logging.warning('No magic found at data offset, assuming empty table')
 
     def clear(self):
         self.ops = []
